@@ -37,11 +37,25 @@ struct Employees {
 
 void empDataInput();
 void printLine();
+float grossWeekPay(float hours, float rate);
 
 int main()
 {
     empDataInput();
+
 }
+
+float grossWeekPay(float hours, float rate) {
+    if (hours <= 40) {
+        return hours * rate;
+        
+    }
+    else {
+        int temp = hours - 40;
+        return ((hours - temp) * rate) + (temp * (rate * 1.5));
+    }
+}
+
 void printLine() {
     cout << endl;
     for (int i = 0; i < 100; i++) {
@@ -53,9 +67,9 @@ void printLine() {
 void empDataInput() {
     Employees emp;
 
-    for (int i = 0; i < 1; i++) {        
+    for (int i = 0; i < 1; i++) {
         printLine();
-        cout << "\nEnter Details for Employee #" << i+1 << endl;
+        cout << "\nEnter Details for Employee #" << i + 1 << endl;
         printLine();
         cout << "Enter Employee ID: ";
         getline(cin, emp.employeeId[i]);
@@ -70,9 +84,9 @@ void empDataInput() {
         cout << "Enter Street Address: ";
         getline(cin, emp.streetAd[i]);
         cout << "Enter Suburb: ";
-        cin >> emp.suburbAd[i];
+        getline(cin, emp.suburbAd[i]);
         cout << "Enter City: ";
-        cin >> emp.cityAd[i];
+        getline(cin, emp.cityAd[i]);
         cout << "Enter Post Code: ";
         cin >> emp.postCode[i];
         cout << "Enter Phone Number: ";
@@ -85,11 +99,11 @@ void empDataInput() {
         cin >> emp.hourRate[i];
         cout << "Enter Tax Rate: ";
         cin >> emp.taxRate[i];
-        cout << "Enter Tax Deducted: ";
-        cin >> emp.taxDeducted[i];
-        cout << "Enter Gross Week: ";
-        cin >> emp.grossWeek[i];
-        cout << "Enter Net Week: ";
-        cin >> emp.netWeek[i];
+        emp.grossWeek[i] = grossWeekPay(emp.hoursWorked[i], emp.hourRate[i]);
+        cout << "Gross Week Pay: " << emp.grossWeek[i];
+        emp.taxDeducted[i] = emp.grossWeek[i] * (emp.taxRate[i] * 0.01);
+        cout << "\nTotal Tax Deducted: " << emp.taxDeducted[i];
+        emp.netWeek[i] = emp.grossWeek[i] - emp.taxDeducted[i];
+        cout << "\nTotal Net Week: " << emp.netWeek[i];
     }
 }
