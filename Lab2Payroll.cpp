@@ -35,13 +35,14 @@ struct Employees {
     }
 };
 
-void empDataInput();
+void empDataInput(float tGross, float tNet, float tTax);
 void printLine();
 float grossWeekPay(float hours, float rate);
 
 int main()
 {
-    empDataInput();
+    float totalGross = 0, totalNet = 0, totalTax = 0;
+    empDataInput(totalGross, totalNet, totalTax);
 
 }
 
@@ -64,46 +65,64 @@ void printLine() {
     cout << endl;
 }
 
-void empDataInput() {
+void empDataInput(float tGross, float tNet, float tTax) {
     Employees emp;
 
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 2; i++) {
         printLine();
         cout << "\nEnter Details for Employee #" << i + 1 << endl;
         printLine();
-        cout << "Enter Employee ID: ";
+        cout << "\nEnter Employee ID: ";
         getline(cin, emp.employeeId[i]);
-        cout << "Enter First Name: ";
+        cout << "\nEnter First Name: ";
         getline(cin, emp.firstName[i]);
-        cout << "Enter Middle Name: ";
+        cout << "\nEnter Middle Name: ";
         getline(cin, emp.middleName[i]);
-        cout << "Enter Last Name: ";
+        cout << "\nEnter Last Name: ";
         getline(cin, emp.lastName[i]);
-        cout << "Enter Email Address: ";
+        cout << "\nEnter Email Address: ";
         getline(cin, emp.emailAd[i]);
-        cout << "Enter Street Address: ";
+        cout << "\nEnter Street Address: ";
         getline(cin, emp.streetAd[i]);
-        cout << "Enter Suburb: ";
+        cout << "\nEnter Suburb: ";
         getline(cin, emp.suburbAd[i]);
-        cout << "Enter City: ";
+        cout << "\nEnter City: ";
         getline(cin, emp.cityAd[i]);
-        cout << "Enter Post Code: ";
+        cout << "\nEnter Post Code: ";
         cin >> emp.postCode[i];
-        cout << "Enter Phone Number: ";
+        cout << "\nEnter Phone Number: ";
         cin >> emp.phoneNo[i];
-        cout << "Enter IRD Number: ";
+        cout << "\nEnter IRD Number: ";
         cin >> emp.irdNo[i];
-        cout << "Enter Hours Worked: ";
-        cin >> emp.hoursWorked[i];
-        cout << "Enter Hourly Rate: ";
+        bool inRange = false;
+        do {
+            cout << "\nEnter Hours Worked: ";
+            cin >> emp.hoursWorked[i];
+            if (emp.hoursWorked[i] >= 1 && emp.hoursWorked[i] <= 49) { 
+                inRange = true;
+            }
+        } while (inRange == false);
+        do {
+            cout << "\nEnter Hourly Rate: ";
+            cin >> emp.hourRate[i];
+            if (emp.hourRate[i] >= 20 && emp.hourRate[i] <= 50) {
+                inRange = true;
+            }
+        } while (inRange == false);
+        cout << "\nEnter Hourly Rate: ";
         cin >> emp.hourRate[i];
-        cout << "Enter Tax Rate: ";
+        cout << "\nEnter Tax Rate: ";
         cin >> emp.taxRate[i];
         emp.grossWeek[i] = grossWeekPay(emp.hoursWorked[i], emp.hourRate[i]);
-        cout << "Gross Week Pay: " << emp.grossWeek[i];
+        tGross += emp.grossWeek[i];
+        cout << "\nGross Week Pay: " << emp.grossWeek[i];
         emp.taxDeducted[i] = emp.grossWeek[i] * (emp.taxRate[i] * 0.01);
+        tTax += emp.taxDeducted[i];
         cout << "\nTotal Tax Deducted: " << emp.taxDeducted[i];
         emp.netWeek[i] = emp.grossWeek[i] - emp.taxDeducted[i];
-        cout << "\nTotal Net Week: " << emp.netWeek[i];
+        tNet += emp.netWeek[i];
+        cout << "\nTotal Net Week: " << emp.netWeek[i] << endl;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+    cout << endl << tGross << tNet << tTax;
 }

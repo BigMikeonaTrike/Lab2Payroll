@@ -2,3 +2,5 @@ C:\Users\micha\source\repos\Lab2Payroll\Debug\Lab2Payroll.exe
 C:\Users\micha\source\repos\Lab2Payroll\Debug\Lab2Payroll.pdb
 C:\Users\micha\Desktop\CS103\Code\Lab2Payroll\Debug\Lab2Payroll.exe
 C:\Users\micha\Desktop\CS103\Code\Lab2Payroll\Debug\Lab2Payroll.pdb
+C:\Users\270058186\OneDrive - UP Education\Desktop\CS103\VSCodes\Lab2Payroll\Debug\Lab2Payroll.exe
+C:\Users\270058186\OneDrive - UP Education\Desktop\CS103\VSCodes\Lab2Payroll\Debug\Lab2Payroll.pdb
